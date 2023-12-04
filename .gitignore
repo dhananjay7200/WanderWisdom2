@@ -1,0 +1,7 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/Wander_wisdom/bin/Debug/net6.0
+/Wander_wisdom/.vs/Wander_wisdom
+/Wander_wisdom/obj
