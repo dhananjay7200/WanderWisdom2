@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations.Operations;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Migrations.Operations;
 using Wander_wisdom.Interface;
 using Wander_wisdom.Models;
 
@@ -12,26 +13,27 @@ namespace Wander_wisdom.Repository
         {
             _context = context;
         }
-        public UserDetail UserLogin(UserDetail user)
+        public async Task<UserDetail> UserLogin(UserDetail user)
         {
             UserDetail udata=new UserDetail();
 
 
             try
             {
-               udata = _context.UserDetails.Where(x => (x.UserEmail == user.UserEmail && x.UserPassword==user.UserPassword )).FirstOrDefault();
+               udata = await _context.UserDetails.Where(x => (x.UserEmail == user.UserEmail && x.UserPassword==user.UserPassword )).FirstAsync();
+            
             }catch(Exception ex)
             {
-                throw new Exception("Error in login");
+                throw new Exception("Error in login repo");
             }
             return udata;
         }
 
-        public string UserRegistration(UserDetail user)
+        public async Task<string> UserRegistration(UserDetail user)
         {
             try
             {
-                _context.UserDetails.Add(user);
+               await _context.UserDetails.AddAsync(user);
                 _context.SaveChanges();
             }catch(Exception ex)
             {

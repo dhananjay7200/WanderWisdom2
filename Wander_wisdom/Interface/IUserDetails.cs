@@ -4,9 +4,9 @@ namespace Wander_wisdom.Interface
 {
     public interface IUserDetails
     {
-        string UserRegistration(UserDetail user);
+        Task<string> UserRegistration(UserDetail user);
 
-        UserDetail UserLogin(UserDetail user);
+        Task<UserDetail> UserLogin(UserDetail user);
 
     }
 }

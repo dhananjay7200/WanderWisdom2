@@ -4,8 +4,8 @@ namespace Wander_wisdom.Interface
 {
     public interface IPostDetails
     {
-        string AddPost(PostDetail postDetail);
+        Task<string> AddPost(PostDetail postDetail);
 
-        string DeletePost(int id);
+        Task<string> DeletePost(int id);
     }
 }

@@ -11,12 +11,12 @@ namespace Wander_wisdom.Repository
         {
             _context = context;
         }
-        public string AddPost(PostDetail postDetail)
+        public async Task<string> AddPost(PostDetail postDetail)
         {
 
             try
             {
-                _context.PostDetails.Add(postDetail);
+                await _context.PostDetails.AddAsync(postDetail);
                 _context.SaveChanges();
 
             }catch (Exception ex)
@@ -26,16 +26,19 @@ namespace Wander_wisdom.Repository
             return "Post Added";
         }
 
-        public string DeletePost(int id)
+        public async Task<string> DeletePost(int id)
         {
             PostDetail findPost=new PostDetail();
             try
             {
-                findPost = _context.PostDetails.Where(x => ( x.PostId== id)).FirstOrDefault();  
+                findPost =await  _context.PostDetails.FindAsync(id); 
+                _context.PostDetails.Remove(findPost);
+                _context.SaveChanges();
             }catch(Exception ex)
             {
                 throw new Exception("error while deletiing post");
             }
+
             return "deleted post ";
         }
     }
