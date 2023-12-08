@@ -122,10 +122,17 @@ namespace Wander_wisdom.Controllers
          }*/
 
 
-        [HttpPost]
+        [HttpPost("login")]
         public async Task<UserDetail> UserLogin(UserDetail user)
         {
-           return  await _context.UserLogin(user);
+            return await _context.UserLogin(user);
         }
+
+        [HttpPost]
+
+        public async Task<string> UserRegistration(UserDetail user)
+        {
+            return await _context.UserRegistration(user);
+        } 
     }
 }
