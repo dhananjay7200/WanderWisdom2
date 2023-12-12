@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -120,15 +121,16 @@ namespace Wander_wisdom.Controllers
          {
              return (_context.UserDetails?.Any(e => e.UserIdPk == id)).GetValueOrDefault();
          }*/
-
+       
 
         [HttpPost("login")]
-        public async Task<UserDetail> UserLogin(UserDetail user)
+        public async Task<string> UserLogin(UserDetail user)
         {
             return await _context.UserLogin(user);
         }
 
         [HttpPost]
+       
 
         public async Task<string> UserRegistration(UserDetail user)
         {

@@ -6,7 +6,9 @@ namespace Wander_wisdom.Interface
     {
         Task<string> UserRegistration(UserDetail user);
 
-        Task<UserDetail> UserLogin(UserDetail user);
+        Task<string> UserLogin(UserDetail user);
+
+        Task<string> DeleteUser(int id);
 
     }
 }
