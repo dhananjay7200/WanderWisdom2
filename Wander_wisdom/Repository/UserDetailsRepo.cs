@@ -41,5 +41,7 @@ namespace Wander_wisdom.Repository
             }
             return "Registered";
         }
+
+
     }
 }
