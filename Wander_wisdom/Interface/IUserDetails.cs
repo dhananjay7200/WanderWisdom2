@@ -8,5 +8,7 @@ namespace Wander_wisdom.Interface
 
         Task<UserDetail> UserLogin(UserDetail user);
 
+        Task<string> DeleteUser(int it);
+
     }
 }

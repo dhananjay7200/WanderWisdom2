@@ -13,6 +13,9 @@ namespace Wander_wisdom.Repository
         {
             _context = context;
         }
+
+       
+
         public async Task<UserDetail> UserLogin(UserDetail user)
         {
             UserDetail udata=new UserDetail();
@@ -41,6 +44,31 @@ namespace Wander_wisdom.Repository
             }
             return "Registered";
         }
+
+
+        public async Task<string> DeleteUser(int id)
+        {
+            try
+            {
+                UserDetail Udata=await _context.UserDetails.FindAsync(id);
+                if (Udata!=null)
+                {
+                    Udata.IsDeleted = 0;
+                    _context.SaveChanges();
+                    return "";
+                }
+                else
+                {
+                    return "";
+                }
+
+            }catch(Exception ex)
+            {
+                throw new Exception(ex + "error in delete user repo");
+            }
+        }
+
+
 
 
     }

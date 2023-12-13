@@ -133,6 +133,12 @@ namespace Wander_wisdom.Controllers
         public async Task<string> UserRegistration(UserDetail user)
         {
             return await _context.UserRegistration(user);
-        } 
+        }
+
+        [HttpDelete]
+        public async Task<string> DeleteUser(int id)
+        {
+            return await _context.DeleteUser(id);
+        }
     }
 }
