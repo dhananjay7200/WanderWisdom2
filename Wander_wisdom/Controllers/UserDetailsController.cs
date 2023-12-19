@@ -123,7 +123,7 @@ namespace Wander_wisdom.Controllers
 
 
         [HttpPost("login")]
-        public async Task<UserDetail> UserLogin(UserDetail user)
+        public async Task<string> UserLogin(Logindetails user)
         {
             return await _context.UserLogin(user);
         }
@@ -140,5 +140,6 @@ namespace Wander_wisdom.Controllers
         {
             return await _context.DeleteUser(id);
         }
+
     }
 }
