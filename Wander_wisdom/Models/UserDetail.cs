@@ -17,7 +17,9 @@ public partial class UserDetail
 
     public string UserCity { get; set; } = null!;
 
-    public string UserRole { get; set; } = null!;
+    public string Role { get; set; } = null!;
 
     public byte? IsDeleted { get; set; }
+
+    public virtual ICollection<PostDetail> PostDetails { get; set; } = new List<PostDetail>();
 }

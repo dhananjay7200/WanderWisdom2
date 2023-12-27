@@ -1,4 +1,5 @@
-﻿using Wander_wisdom.Interface;
+﻿using Microsoft.EntityFrameworkCore;
+using Wander_wisdom.Interface;
 using Wander_wisdom.Models;
 
 namespace Wander_wisdom.Repository
@@ -40,6 +41,29 @@ namespace Wander_wisdom.Repository
             }
 
             return "deleted post ";
+        }
+
+        public async Task<IEnumerable<PostDetail>> GetPost(int id)
+        {
+            List<PostDetail> Postdata = new List<PostDetail>();
+            try
+            {
+                Postdata = await _context.PostDetails.Where(e => (e.UserIdFk == id)).ToListAsync(); 
+            }catch(Exception ex)
+            {
+                throw new Exception("Error in get post repo" + ex.Message);
+            }
+            return Postdata;
+        }
+        public async Task<IEnumerable<PostDetail>> GetAllPost()
+        {
+            List<PostDetail> Postdata=new List<PostDetail>();
+            try {
+                Postdata = await _context.PostDetails.ToListAsync();
+            } catch(Exception ex) {
+                throw new Exception("eoor in getting all post details"+ex.Message);
+            }
+            return Postdata;
         }
     }
 }

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Wander_wisdom.Interface;
 using Wander_wisdom.Models;
 
 namespace Wander_wisdom.Controllers
@@ -13,26 +14,35 @@ namespace Wander_wisdom.Controllers
     [ApiController]
     public class PostDetailsController : ControllerBase
     {
-        private readonly WanderWisdomContext _context;
+        private readonly IPostDetails _context;
 
-        public PostDetailsController(WanderWisdomContext context)
+        public PostDetailsController(IPostDetails context)
         {
             _context = context;
         }
 
         // GET: api/PostDetails
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<PostDetail>>> GetPostDetails()
+        [HttpGet("{id}")]
+        public Task<IEnumerable<PostDetail>> GetPostDetails(int id)
         {
-          if (_context.PostDetails == null)
-          {
-              return NotFound();
-          }
-            return await _context.PostDetails.ToListAsync();
+            return  _context.GetPost(id);
+        }
+
+
+        [HttpGet]
+        public Task<IEnumerable<PostDetail>> GetAllPostDetails()
+        {
+            return _context.GetAllPost();
+        }
+
+        [HttpPost]
+        public Task<string> AddPostDeatils(PostDetail post)
+        {
+            return _context.AddPost(post);
         }
 
         // GET: api/PostDetails/5
-        [HttpGet("{id}")]
+       /* [HttpGet("{id}")]
         public async Task<ActionResult<PostDetail>> GetPostDetail(int id)
         {
           if (_context.PostDetails == null)
@@ -118,6 +128,6 @@ namespace Wander_wisdom.Controllers
         private bool PostDetailExists(int id)
         {
             return (_context.PostDetails?.Any(e => e.PostId == id)).GetValueOrDefault();
-        }
+        }*/
     }
 }

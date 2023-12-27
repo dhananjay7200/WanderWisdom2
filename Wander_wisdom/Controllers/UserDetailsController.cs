@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -128,13 +129,14 @@ namespace Wander_wisdom.Controllers
             return await _context.UserLogin(user);
         }
 
+     
         [HttpPost]
-
         public async Task<string> UserRegistration(UserDetail user)
         {
             return await _context.UserRegistration(user);
         }
 
+        [Authorize(Roles = "User")]
         [HttpDelete]
         public async Task<string> DeleteUser(int id)
         {

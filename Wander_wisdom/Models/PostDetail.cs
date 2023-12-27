@@ -13,7 +13,11 @@ public partial class PostDetail
 
     public byte? IsDeleted { get; set; }
 
+    public int? UserIdFk { get; set; }
+
     public virtual ICollection<CommentsDetail> CommentsDetails { get; set; } = new List<CommentsDetail>();
 
     public virtual ICollection<LikesDetail> LikesDetails { get; set; } = new List<LikesDetail>();
+
+    public virtual UserDetail? UserIdFkNavigation { get; set; }
 }

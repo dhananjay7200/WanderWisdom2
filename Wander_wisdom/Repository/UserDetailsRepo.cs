@@ -85,10 +85,12 @@ namespace Wander_wisdom.Repository
             var credentials = new SigningCredentials(signinKey, SecurityAlgorithms.HmacSha256);
             var claims = new[]
             {
+                new Claim(ClaimTypes.Role,"User"),
                   new Claim("email",user.UserEmail),
-                  new Claim("role", user.UserRole),
                    new Claim("id", user.UserIdPk.ToString()),
                    new Claim("name",user.UserName),
+                   new Claim("role",user.Role)
+                   
               };
             var token = new JwtSecurityToken(iconfiguration["Jwt:Issuer"],
                 iconfiguration["Jwt:Audience"],

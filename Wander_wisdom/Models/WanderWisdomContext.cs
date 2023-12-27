@@ -82,6 +82,11 @@ public partial class WanderWisdomContext : DbContext
                 .HasMaxLength(100)
                 .IsUnicode(false)
                 .HasColumnName("Post_Title");
+            entity.Property(e => e.UserIdFk).HasColumnName("User_Id_fk");
+
+            entity.HasOne(d => d.UserIdFkNavigation).WithMany(p => p.PostDetails)
+                .HasForeignKey(d => d.UserIdFk)
+                .HasConstraintName("UserId_Post_fk");
         });
 
         modelBuilder.Entity<UserDetail>(entity =>
@@ -94,6 +99,9 @@ public partial class WanderWisdomContext : DbContext
             entity.Property(e => e.IsDeleted)
                 .HasDefaultValueSql("((1))")
                 .HasColumnName("isDeleted");
+            entity.Property(e => e.Role)
+                .HasMaxLength(50)
+                .IsUnicode(false);
             entity.Property(e => e.UserCity)
                 .HasMaxLength(50)
                 .IsUnicode(false);
@@ -107,9 +115,6 @@ public partial class WanderWisdomContext : DbContext
                 .HasMaxLength(50)
                 .IsUnicode(false);
             entity.Property(e => e.UserPhonenumber).HasMaxLength(50);
-            entity.Property(e => e.UserRole)
-                .HasMaxLength(50)
-                .IsUnicode(false);
         });
 
         OnModelCreatingPartial(modelBuilder);
